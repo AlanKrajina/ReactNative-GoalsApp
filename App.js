@@ -7,25 +7,24 @@ export default function App() {
 
   const [enteredTextGoal, newTextFunc] = useState('')
 
-  const inputHandler = enteredText => {
-    newTextFunc(enteredText)
+  const inputHandler = enteredText => { // props function takes input value
+    newTextFunc(enteredText)   // and creates NEW enteredTextGoal STATE
   }
 
 // create state to store enteredTextGoal from TextInput:
-
-  const [goals, setGoals] = useState([])    // goals new empty array
+  const [goals, setGoals] = useState([])    // goals new STATE - empty array
                                             // setGoals function to set state
 
-  const addGoalHandler = () => {
-    setGoals(currentGoals => 
-      [...currentGoals, {id: Math.random().toString(), value: enteredTextGoal}])   // onPress creates ne array of objects --> item.value TO USE
+  const addGoalHandler = () => {  // onPress updates GOALS STATE with new objects
+    setGoals(currentGoals =>      // -> current - previous GOALS STATE
+      [...currentGoals, {id: Math.random().toString(), value: enteredTextGoal}]) // adds previous and new
     }
 
-  const deleteItem = itemID => {
-    setGoals(currentGoals => {      // currentGoals - current items ARRAY
-      return currentGoals.filter(item => item.id !== itemID)  // returns all but the one we pressed
-    })
-  }
+  const deleteItem = itemID => {  // itemID is the props.id we send to <GoalItem/> (every newly created row has its own id upon creation)
+    setGoals(currentGoals => {      // -> current - previous GOALS STATE
+      return currentGoals.filter(item => item.id !== itemID)  // checks current GOALS and returns all 
+    })                                       // items in goals that dont match to the clicked one
+  }                                   //  (clicked has specific itemID & ALL ids in GOALS ARRAY)
 
 
   return (
