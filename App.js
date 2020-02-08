@@ -24,7 +24,7 @@ export default function App() {
     setGoals(currentGoals => {      // -> current - previous GOALS STATE
       return currentGoals.filter(item => item.id !== itemID)  // checks current GOALS and returns NEW ARRAY (GOALS)
     })                                       // items in goals that dont match to the clicked one
-  }                                //  (clicked has specific itemID from props & ALL ids in GOALS ARRAY)
+  }                                // (clicked has specific itemID from props & ALL ids in GOALS ARRAY)
 
 
   return (
