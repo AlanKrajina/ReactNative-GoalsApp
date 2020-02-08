@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 
 export default function App() {
 
@@ -15,12 +15,9 @@ export default function App() {
                                             // setGoals function to set state
 
   const addGoalHandler = () => {
-    setGoals([...goals, enteredTextGoal])   // add all elements 'enteredTextGoal' to new -> ...goals                    
-  }                                        // goals is new state we use
-
-// outputing onPress ADD
-  const newViews = goals.map(el=> <Text key={el}>{el}</Text>)
-
+    setGoals(currentGoals => 
+      [...currentGoals, {id: Math.random().toString(), value: enteredTextGoal}])   // onPress creates ne array of objects --> item.value TO USE
+    }
 
   return (
     <View style={styles.screen}>
@@ -36,9 +33,12 @@ export default function App() {
               onPress={addGoalHandler}
               />
           </View>
-          <View>
-            {newViews}
-          </View>
+          <FlatList 
+            keyExtractor={item => item.id}
+            data={goals}                  // our current state array
+            renderItem={itemData=> (      // iterating through goals array that has objects
+              <Text style={styles.listItem}>{itemData.item.value}</Text>  // outputing each object from array
+            )} />
     </View>
   );
 }
@@ -56,5 +56,12 @@ const styles = StyleSheet.create({
     width: '50%', 
     borderColor: 'black', 
     borderWidth: 1
+  },
+  listItem: {
+    padding: 10,
+    borderColor: 'blue',
+    backgroundColor: 'grey',
+    borderWidth: 1,
+    margin: 2
   }
 });
