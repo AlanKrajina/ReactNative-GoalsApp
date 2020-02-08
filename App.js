@@ -17,8 +17,8 @@ export default function App() {
 
   const addGoalHandler = () => {  // onPress updates GOALS STATE with new objects
     setGoals(currentGoals =>      // -> current - previous GOALS STATE
-      [...currentGoals, {id: Math.random().toString(), value: enteredTextGoal}]) // adds previous and new
-    }
+      [...currentGoals, {id: Math.random().toString(), value: enteredTextGoal}]) // combines previous and newly created object
+    }                                                                                 // from enteredTextGoal STATE (input string)
 
   const deleteItem = itemID => {  // itemID is the props.id we send to <GoalItem/> (every newly created row has its own id upon creation)
     setGoals(currentGoals => {      // -> current - previous GOALS STATE
