@@ -21,6 +21,13 @@ export default function App() {
       [...currentGoals, {id: Math.random().toString(), value: enteredTextGoal}])   // onPress creates ne array of objects --> item.value TO USE
     }
 
+  const deleteItem = itemID => {
+    setGoals(currentGoals => {      // currentGoals - current items ARRAY
+      return currentGoals.filter(item => item.id !== itemID)  // returns all but the one we pressed
+    })
+  }
+
+
   return (
     <View style={styles.screen}>
           <GoalInput 
@@ -30,7 +37,7 @@ export default function App() {
           <FlatList 
             keyExtractor={item => item.id}
             data={goals}                  
-            renderItem={itemData=> <GoalItem data={itemData}/> } />
+            renderItem={itemData=> <GoalItem id={itemData.item.id} removeItem={deleteItem} data={itemData}/> } />
     </View>
   );
 }
