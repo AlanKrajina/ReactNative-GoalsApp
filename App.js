@@ -3,7 +3,23 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 export default function App() {
 
-  const [oldState, stateFunk] = useState('')
+  const [enteredTextGoal, newTextFunc] = useState('')
+
+  const inputHandler = enteredText => {
+    newTextFunc(enteredText)
+  }
+
+// create state to store enteredTextGoal from TextInput:
+
+  const [goals, setGoals] = useState([])    // goals new empty array
+                                            // setGoals function to set state
+
+  const addGoalHandler = () => {
+    setGoals([...goals, enteredTextGoal])   // add all elements 'enteredTextGoal' to new -> ...goals                    
+  }                                        // goals is new state we use
+
+// outputing onPress ADD
+  const newViews = goals.map(el=> <Text key={el}>{el}</Text>)
 
 
   return (
@@ -11,11 +27,17 @@ export default function App() {
           <View style={styles.inputContainer}>
             <TextInput 
               placeholder='Course Goal' 
-              style={styles.textStyle}/>
+              style={styles.textStyle}
+              onChangeText={inputHandler}
+              value={enteredTextGoal}
+              />
             <Button 
               title='ADD'
-              onPress={()=> stateFunk()}
+              onPress={addGoalHandler}
               />
+          </View>
+          <View>
+            {newViews}
           </View>
     </View>
   );
